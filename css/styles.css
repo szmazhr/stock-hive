@@ -50,6 +50,35 @@ h6 {
   position: relative;
   overflow: hidden;
   filter: drop-shadow(0px 8px 3px rgba(0, 0, 0, 0.25));
+  color: #FFF;
+}
+.hexagon:not(:has(> a)) {
+  -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+          clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+}
+.hexagon .item__title {
+  font-weight: 500;
+  font-size: calc(var(--size) / 8);
+  margin: 0;
+  max-width: 80%;
+}
+.hexagon .item__text {
+  font-size: calc(var(--size) / 15);
+  margin: 0;
+  font-weight: 500;
+}
+.hexagon .item__img {
+  height: calc(var(--size) / 5);
+  width: calc(var(--size) / 5);
+  border-radius: 50%;
+  overflow: hidden;
+  transition: filter var(--transition);
+}
+.hexagon .item__img img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .hexagon > a {
   display: block;
@@ -77,14 +106,23 @@ h6 {
      object-fit: contain;
   transition: transform var(--transition), fill var(--transition);
 }
+.hexagon--yellow {
+  color: #000;
+}
 .hexagon--yellow svg {
   fill: #EDBD13;
+}
+.hexagon--white {
+  color: #000;
 }
 .hexagon--white svg {
   fill: #FFFFFF;
 }
 .hexagon--gray svg {
   fill: #666666;
+}
+.hexagon--text-white {
+  color: #FFF;
 }
 .hexagon--large {
   --size: 22.95vw;
@@ -124,26 +162,44 @@ h6 {
 .corners .hexagon--tl {
   top: 0;
   left: 0;
-  transform: translate(-46%, -50%);
 }
 .corners .hexagon--tr {
   top: 0;
   right: 0;
-  transform: translate(50%, -50%);
 }
 .corners .hexagon--br {
-  bottom: -25%;
-  right: -18%;
   bottom: 0;
   right: 0;
-  transform: translate(78%, 31%) rotateZ(49deg);
 }
 .corners .hexagon--bl {
-  bottom: -45%;
-  left: -8%;
   bottom: 0;
   left: 0;
+}
+.corners--style1 .hexagon--tl {
+  transform: translate(-46%, -50%);
+}
+.corners--style1 .hexagon--tr {
+  transform: translate(50%, -50%);
+}
+.corners--style1 .hexagon--br {
+  transform: translate(78%, 31%) rotateZ(49deg);
+}
+.corners--style1 .hexagon--bl {
   transform: translate(-25%, 64%) rotateZ(28deg);
+}
+.corners--style2 .hexagon--tl {
+  left: 35%;
+  transform: translate(0, -62%) rotate(76deg);
+}
+.corners--style2 .hexagon--tr {
+  transform: translate(70%, 40%) rotateZ(9deg);
+}
+.corners--style2 .hexagon--br {
+  right: 50%;
+  transform: translate(78%, 55%) rotateZ(49deg);
+}
+.corners--style2 .hexagon--bl {
+  transform: translate(-38%, 63%) rotateZ(36deg);
 }
 
 .main {
@@ -152,6 +208,21 @@ h6 {
   justify-content: center;
   height: 100vh;
   position: relative;
+}
+.main__style2 {
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 8vw 5vw;
+}
+.main__style2 .main__container {
+  justify-content: flex-start;
+  max-width: 70vw;
+  width: 1350px;
+  height: 100%;
+}
+.main__form {
+  flex: 1;
+  max-width: 500px;
 }
 .main .hexagon--tr--home {
   position: absolute;
@@ -172,6 +243,12 @@ h6 {
   flex-wrap: wrap;
   max-width: 35vw;
   gap: 1%;
+}
+.main__links {
+  align-self: flex-start;
+}
+.main__links .our-products {
+  margin-bottom: 0.9vw;
 }
 .main__inner {
   display: flex;
@@ -200,7 +277,10 @@ h6 {
 
 a {
   text-decoration: none;
-  color: #000;
+  color: inherit;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .sidebar {
@@ -208,13 +288,19 @@ a {
   height: 100vh;
   display: flex;
   align-items: center;
+  z-index: 10;
+}
+.sidebar--l1 {
   left: -5vw;
+}
+.sidebar--l2 {
+  left: -11.5vw;
 }
 .sidebar__row {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3%;
+  gap: 0.2vw;
 }
 
 .our-products__title {
@@ -246,57 +332,54 @@ a {
   -o-object-fit: contain;
      object-fit: contain;
   position: absolute;
-  left: 20%;
+  left: 40%;
 }
 .our-products a:hover img {
   animation: left-right 2s linear infinite;
 }
 
 .add-coupon__title {
+  margin: 0;
   font-weight: 900;
   font-size: 0.9rem;
   color: #FFFFFF;
-}
-
-.product {
-  pointer-events: none;
-}
-.product__title {
-  font-weight: 900;
-  font-size: 2rem;
-  margin-bottom: 0;
   max-width: 80%;
 }
-.product__text {
-  margin: 0;
+.add-coupon__title--small {
   font-weight: 500;
+  font-size: 0.8rem;
 }
-.product__img {
-  height: 3vw;
-  width: 3vw;
-  border-radius: 50%;
-  overflow: hidden;
-  transition: filter var(--transition);
+
+.product, .link {
+  pointer-events: none;
 }
-.product__img img {
-  height: 100%;
-  width: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+.product .item__title, .link .item__title {
+  margin-top: 0.83rem;
+  font-weight: 900;
 }
-.product a {
+.product a, .link a {
   pointer-events: all;
 }
-.product:has(a:hover) a {
+.product:has(a:hover) a, .link:has(a:hover) a {
   transition: color var(--transition);
   color: #FFF;
 }
-.product:has(a:hover) img {
+.product:has(a:hover) img, .link:has(a:hover) img {
   filter: invert(1) saturate(0);
 }
-.product:has(a:hover) svg {
+.product:has(a:hover) svg, .link:has(a:hover) svg {
   transform: rotateZ(-180deg);
   fill: #000;
+}
+
+.link .item__title {
+  margin: 0;
+}
+.link:has(a:hover) a {
+  color: #000;
+}
+.link:has(a:hover) svg {
+  fill: #fff;
 }
 
 @keyframes left-right {
@@ -312,4 +395,118 @@ a {
   100% {
     transform: translateX(0);
   }
+}
+.mb-2 {
+  margin-bottom: 1vw;
+}
+
+form .form-control {
+  --background-color: #f1f1f1;
+  margin-left: 2.5rem;
+  position: relative;
+  margin-bottom: 20px;
+}
+form .form-control__border {
+  position: relative;
+  border: 1px solid #666666;
+  border-left: 0;
+  border-right: 0;
+  background-color: var(--background-color);
+}
+form .form-control__border::before, form .form-control__border::after {
+  content: "";
+  position: absolute;
+  height: 58%;
+  width: 20px;
+  background-color: var(--background-color);
+  border-right: 1px solid #666666;
+  right: 0;
+  bottom: 0;
+  transform: rotateZ(30deg);
+  transform-origin: 100% 100%;
+}
+form .form-control__border::after {
+  top: 0;
+  transform: rotateZ(-30deg);
+  transform-origin: 100% 0;
+}
+form .form-control label {
+  color: transparent;
+  position: absolute;
+  font-size: 0;
+  top: 0;
+  left: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+form .form-control label .hexagon {
+  left: -50%;
+  -webkit-clip-path: none;
+          clip-path: none;
+  width: -moz-max-content;
+  width: max-content;
+  height: 120%;
+}
+form .form-control label .hexagon svg {
+  transform: rotateZ(30deg);
+  stroke: #FFF;
+  stroke-width: 4px;
+}
+form .form-control label img {
+  height: 30%;
+  width: 30%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+form .form-control input {
+  font-size: 1.5rem;
+  padding: 0.3em 0.5em 0.3em 1.5em;
+  font-weight: 300;
+  font-family: inherit;
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+form .form-control input[type=email], form .form-control input[type=text], form .form-control input[type=password] {
+  width: 100%;
+}
+form .form-control input[type=checkbox] {
+  display: none;
+}
+form .form-control input[type=checkbox] ~ label {
+  font-size: inherit;
+  color: inherit;
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: -0.7rem;
+  color: #666666;
+}
+form .form-control input[type=checkbox] ~ label .hexagon {
+  height: 20px;
+  width: 70px;
+  left: 0;
+  filter: none;
+}
+form .form-control input[type=checkbox] ~ label .hexagon svg {
+  fill: #f1f1f1;
+  stroke: #000;
+}
+form .form-control input[type=checkbox]:checked ~ label .hexagon svg {
+  fill: #000;
+}
+
+.form-submit button {
+  display: inline-block;
+}
+.form-submit .hexagon {
+  height: 20px;
+  width: 70px;
+  filter: none;
+  display: inline-block;
+}
+.form-submit .hexagon svg {
+  fill: #f1f1f1;
+  stroke: #000;
 }
